@@ -1,0 +1,190 @@
+# es6
+
+## 基础数据类型的扩展
+### String
+#### 新增函数
+
+```js
+let s = 'hello'
+s.startsWith('he')  // true
+s.endsWith('lo')    // true
+s.includes('el')    // true
+s.repeat(3) // 返回得到 'hellohellohello`
+```
+#### 模板字符串
+```js
+let name = 'Jasper';
+console.log(`I like ${name}`);
+
+// 使用表达式和调用函数
+function add(x, y) {
+  return x + y;
+}
+
+const a = 5;
+const b = 6;
+let res1 = `5 plus 6 equals ${a + b}`;
+let res2 = `5 plus 6 equals ${add(a,b)}`
+```
+
+### Number
+1. 规范了 二进制(0o) 和 八进制（0b）的表示方法
+2. 将全局函数`parseInt` 和 `parseFloat` 移到了 Number 对象上
+3. 在 Number 对象上增加了 `isNaN` 和 `isInteger` 方法
+    - `isNaN` 判断参数值是否是 NaN
+    - 'isInteger' 判断参数值是否是整数
+4. 在 Number 对象上增加了一个极小常亮 `EPSILON`,可用于浮点数计算
+
+```js
+Math.abs(0.1+0.2-0.3) < Number.EPSILON  // true
+```
+
+### Function
+1. 指定默认值
+2. 获取剩余参数，即处理可变参数
+3. 箭头函数
+    - 注意 this 指向：箭头函数内部 this 指向定义时的外部环境的 this 对象
+
+```js
+// 2 剩余参数
+function add(...values) {
+    let r = 0;
+    for (let n of values) {
+        r += n;
+    }
+    
+    return r;
+}
+
+add(1,2,3,4)  // 10
+```
+
+### Object
+1. 定义时属性与函数简写
+2. 属性名支持表达式
+
+
+### 新增 Symbol/Set 基础类型
+Symbol 代表独一无二的值，避免冲突
+
+Set 可以理解为无重复值的数组
+
+
+## 解构赋值
+### 对象的解构赋值
+```js
+// 1
+let o = {firstName: 'Smith', lastName:'Sugar'};
+let {firstName, middleName, lastName} = o;
+console.log(firstName,middleName,lastName); // Smith, undefined, Sugar
+
+
+// 2 允许属性名自定义
+let {lastName: name} = o;
+console.log(name);  // Sugar
+
+// 属性可以有默认值
+
+// 可以嵌套
+let o = {age:11, name:{firstName: 'Smith', lastName:'Sugar'}};
+let {sex, name:{firstName, lastName}} = o;
+```
+
+
+### 数组的解构赋值
+```js
+const arr = ['Smith', 'Sugar'];
+let [firstName, lastName, middleName] = arr;
+
+// 可以有默认值
+let  [firstName, lastName, middleName='super'] = arr;
+
+// 可以嵌套
+const arr2 = ['male', ['Smith', 'Sugar']];
+let [sex, [firstName, lastName]] = arr2;
+```
+
+### 字符串的解构赋值
+```js
+let [a,b,c,d,e] = 'hello';
+
+
+var {length: len, '0':firstLetter} = 'hello'
+console.log(len, firstLetter)   // 5, h
+```
+
+### 其他数据的解构赋值
+1. 任何数据结构都可以使用对象方式解构
+2. 任何实现了 Iterator 接口的数据结构都可以使用数组方式解构
+
+### 函数参数的解构赋值
+```js
+function add([x,y]) {
+  return x + y;
+}
+
+function minus({x, y} {
+    return x - y;
+}
+
+add([5,3]);             // 8
+minus({x: 5, y: 3})     // 2
+```
+
+## 使用 Bable
+### 使用 bable
+1. 通过 npm 安装到项目     `npm i babel-cli --save-dev`
+2. 在 package.json 中添加代码     `"scripts": {start: "babel test.js --out-file test-compiled.js}`
+
+
+## Set、Map、WeakSet、WeakMap
+
+1. Set
+集合。类似于数组，成员唯一且无序，无重复值
+- 可用于数组去重 （`[new ...Set(arr)]`）
+- 其本质是个构造函数，允许存储任何类型值，且不发生类型转换
+- 内部判断两个值是否相等，类似于精准相等
+- 访问长度  `set.size`
+- 实例方法  `set.add(v)  set.delete(v)   set.has(v)   set.clear()`
+- 转Set对象为Array  `Array.from(set)`
+- 遍历方法  `.keys()   .values()   .entries()`
+
+
+2. WeakSet
+允许将弱引用对象存储在一个集合中
+- 区别： WeakSet 只能储存对象引用，不能放值。WeakSet对象无法被遍历
+
+3. Map
+字典。
+
+与集合相比
+- 共同点：可以储存不同值
+- 不同点：集合以[value, value] 形式存储，集合以[key, value]形式
+
+注意：Map 的键实际与内存地址绑定的。解决了同名属性碰撞clash问题
+
+
+```js
+// map 转 object
+function mapToObj(map) {
+  let obj = Object.create(null)
+  for(let [keym value] of map) {
+    obj[key] = value
+  }
+  return obj
+}
+
+// object 转 map
+function objToMap(obj) {
+  let map = new Map()
+  for (let key of Object.keys(obj)) {
+    map.set(key, obj[key])
+  }
+  return map
+}
+```
+
+4. WeakMap
+一组键值对的集合。jm
+
+## for of
