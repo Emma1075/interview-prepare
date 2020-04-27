@@ -1,7 +1,3 @@
-# 算法
-
-排序：冒泡、插入、快排
-
 ### 选择排序
 
 ```js
@@ -51,40 +47,19 @@ var quickSort = function(arr) {
 }
 ```
 
-### 归并排序
+### 找出数组中重复元素
 
-两个有序数组，合成为一个有序数组
+new Set 方法、obj key唯一性方法、arr.indexOf方法
+
+算法思维（不使用原生数组方法）
+
+给定数组arr中，有且仅有一个重复元素
 
 ```js
-function mergeSort(arr1, arr2) {
-
+// input [2, 32, 22, 23, 32, 122]
+// output 32
+function findRepeat(arr) {
+  // 
 }
 ```
-
-### 选择排序 
-
-[资料](https://segmentfault.com/a/1190000009366805)
-
-```js
-
-```
-
-### 希尔排序
-
-[资料](https://segmentfault.com/a/1190000009461832)
-
-## 堆栈、队列、链表
-
-[堆栈、队列、链表](https://juejin.im/entry/58759e79128fe1006b48cdfd)
-
-## 递归
-
-[递归](https://segmentfault.com/a/1190000009857470)
-
-## 波兰式和逆波兰式
-
-- 理论 [资料](http://www.cnblogs.com/chenying99/p/3675876.html)
-- 源码 [资料](https://github.com/Tairraos/rpn.js/blob/master/rpn.js)
-
-
-
+set 添加、取元素

@@ -1,0 +1,13 @@
+### 什么是 DOCTYPE 及作用
+DTD(document type definition,文档类型定义) 是一系列的语法规则，用来定义 XML 或 (X)HTML 的文件类型。
+浏览器会使用它来判断文档类型，决定使用何种协议来解析以及切换浏览器模式。
+
+DOCTYPE 是用来声明文档类型和 DTD 规范的。一个主要的用途就是文件的合法性验证。如果文件代码不合法，浏览器解析时会出错。
+
+
+#### 怎么写
+- HTML 5 `<!DOCTYPE html>`
+- HTML 4.01 Strict  `....strict.dtd` 
+    - 该 DTD 包含所有的 HTML 元素和属性，但不包括展示性的和弃用的元素
+- HTML 4.01 Transitional    `...loose.dtd`
+    - 该 DTD 包含所有的 HTML 元素和属性，包括展示性的和弃用的元素
