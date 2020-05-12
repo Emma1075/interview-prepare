@@ -70,22 +70,4 @@ var parent = new Parent();
 var child1 = new Child();
 var child2 = new Child();
 
-child1.a = 11;
-child2.a = 12;
-console.log('========')
-parent.show();   // a, [1,2,1], 5
-console.log('========')
-child1.show();   // 
-console.log('========')
-child2.show();
-console.log('========')
-child1.change();
-console.log('========')
-child2.change();
-console.log('========')
-parent.show();
-console.log('========')
-child1.show();
-console.log('========')
-child2.show();
 ```
